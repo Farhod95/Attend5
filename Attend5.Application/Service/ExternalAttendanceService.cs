@@ -12,6 +12,9 @@ namespace Attend5.Application.Service
 
         public void ExcelEkrangaChiqar()
         {
+            Console.WriteLine("*******************************************");
+            Console.WriteLine("          EXCEL RO'YXATI                  ");
+            Console.WriteLine("*******************************************");
             foreach (var item in myExcelFile.ExternalAttendances)
             {
                 Console.WriteLine($" FullNameWithId = {item.FullNameWithId}, Email = {item.Email}, EnterDate = {item.EnterDate}, ExitDate = {item.ExitDate}, Duration = {item.Duration}, IsHost = {item.IsHost}, IsWainting = {item.IsWaiting}");

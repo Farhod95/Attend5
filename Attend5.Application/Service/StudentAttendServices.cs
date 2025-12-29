@@ -12,6 +12,9 @@ namespace Attend5.Application.Service
 
         public void YangiAttendJadvaliKorish()
         {
+            Console.WriteLine("*******************************************");
+            Console.WriteLine("          YANGI JADVAL KO'RINISHI         ");
+            Console.WriteLine("*******************************************");
             foreach (var item in this._DbContext.StudentAttendances)
             {
                 Console.WriteLine($" Id = {item.Id}, FirstName = {item.FirstName}, LastName = {item.LastName}, Email = {item.Email}, FirstEntryTime = {item.FirstEntryTime}, LastExitTime = {item.LastExitTime}, ParticipationMinutes = {item.ParticipationMinutes} ");
@@ -20,9 +23,13 @@ namespace Attend5.Application.Service
 
         public void IsmFamiliyaId()
         {
+            Console.WriteLine("*******************************************");
+            Console.WriteLine("          ISM, FAMILIYA VA ID            ");
+            Console.WriteLine("*******************************************");
             foreach (var item in this._DbContext.StudentAttendances)
             {
-                Console.WriteLine($" {item.Id}  {item.FirstName}   {item.LastName}");
+                Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName}");
+                Console.WriteLine("*******************************************");
             }
         }
 
@@ -39,15 +46,20 @@ namespace Attend5.Application.Service
         {
             var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.Id.Contains(id)).ToList();
             Console.WriteLine();
+            Console.WriteLine("*******************************************");
+            Console.WriteLine($"          ID BO'YICHA QIDIRUV: {id}         ");
+            Console.WriteLine("*******************************************");
             if (myNewStudent.Count == 0 )
             {
-                Console.WriteLine($" Bunday {id} dagi student topilmadi !");
+                Console.WriteLine($"Bunday {id} dagi student topilmadi!");
+                Console.WriteLine("*******************************************");
             }
             else
             {
                 foreach (var item in myNewStudent)
                 {
-                    Console.WriteLine($" {item.Id}   {item.FirstName} {item.LastName} {item.ParticipationMinutes}");
+                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                    Console.WriteLine("*******************************************");
                 }
             }                
         }
@@ -56,16 +68,21 @@ namespace Attend5.Application.Service
         {
             var myNewStudent = this._DbContext.StudentAttendances.Where(x=>x.FirstName.ToLower().Contains(text.ToLower())).ToList();
             Console.WriteLine();
+            Console.WriteLine("*******************************************");
+            Console.WriteLine($"          ISM BO'YICHA QIDIRUV: {text}         ");
+            Console.WriteLine("*******************************************");
             if (myNewStudent.Count ==0)
             {
-                Console.WriteLine($" Bunday {text} ismdagi student topilmadi !");
+                Console.WriteLine($"Bunday {text} ismdagi student topilmadi!");
+                Console.WriteLine("*******************************************");
             }
 
             else
             {
                 foreach(var item in myNewStudent)
                 {
-                    Console.WriteLine($" {item.Id}   {item.FirstName} {item.LastName} {item.ParticipationMinutes}");
+                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                    Console.WriteLine("*******************************************");
                 }
             }
         }
@@ -74,16 +91,21 @@ namespace Attend5.Application.Service
         {
             var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.LastName.ToLower().Contains(text.ToLower())).ToList();
             Console.WriteLine();
+            Console.WriteLine("*******************************************");
+            Console.WriteLine($"          FAMILIYA BO'YICHA QIDIRUV: {text}         ");
+            Console.WriteLine("*******************************************");
             if (myNewStudent.Count == 0)
             {
-                Console.WriteLine($" Bunday {text} familiyadagi student topilmadi !");
+                Console.WriteLine($"Bunday {text} familiyadagi student topilmadi!");
+                Console.WriteLine("*******************************************");
             }
 
             else
             {
                 foreach (var item in myNewStudent)
                 {
-                    Console.WriteLine($" {item.Id}   {item.FirstName} {item.LastName} {item.ParticipationMinutes}");
+                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                    Console.WriteLine("*******************************************");
                 }
             }
         }

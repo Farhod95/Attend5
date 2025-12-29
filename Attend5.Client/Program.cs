@@ -13,7 +13,9 @@ namespace Attend5.Client
         }
         static void Main(string[] args)
         {
-            Console.WriteLine(" Xush kelibsiz !");
+            Console.WriteLine("*******************************************");
+            Console.WriteLine("          XUSH KELIBSIZ                    ");
+            Console.WriteLine("*******************************************");
             var program = new Program();
             program.Run();
         }
@@ -26,13 +28,17 @@ namespace Attend5.Client
                 savol = true;
 
                 Console.WriteLine();
+                Console.WriteLine("*******************************************");
+                Console.WriteLine("          DASTURNI TANLANG                ");
+                Console.WriteLine("*******************************************");
                 Console.WriteLine(" 1. Excel ro'yxatini chiqarish ");
                 Console.WriteLine(" 2. Yangi jadvalni to'liq ko'rish ");
-                Console.WriteLine(" 3. Ism Familiya va Id ni ko'rish ");
+                Console.WriteLine(" 3. Ism, Familiya va ID ko'rish ");
                 Console.WriteLine(" 4. Ism va qatnashgan vaqtini ko'rish ");
-                Console.WriteLine(" 5. Id boyicha qidirish ");
-                Console.WriteLine(" 6. Ism boyicha qidirish ");
-                Console.WriteLine(" 7. Familiya boyicha qidirish ");
+                Console.WriteLine(" 5. ID bo‘yicha qidirish ");
+                Console.WriteLine(" 6. Ism bo‘yicha qidirish ");
+                Console.WriteLine(" 7. Familiya bo‘yicha qidirish ");
+                Console.WriteLine("*******************************************");
                 Console.WriteLine();
                 Console.Write(" Kerakli bo'limni kiriting: ");
 
@@ -89,7 +95,9 @@ namespace Attend5.Client
                         }
                     default:
                         {
-                            Console.WriteLine(" Noto'g'ri amal kiritdingiz !");
+                            Console.WriteLine("*******************************************");
+                            Console.WriteLine("          NOTO‘G‘RI AMAL KIRITILDIGI       ");
+                            Console.WriteLine("*******************************************");
 
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
