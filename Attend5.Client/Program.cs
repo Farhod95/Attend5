@@ -96,7 +96,7 @@ namespace Attend5.Client
                     default:
                         {
                             Console.WriteLine("*******************************************");
-                            Console.WriteLine("          NOTO‘G‘RI AMAL KIRITILDIGI       ");
+                            Console.WriteLine("          NOTO‘G‘RI AMAL KIRITILDI       ");
                             Console.WriteLine("*******************************************");
 
                             if (QaytaIshgaTushir()) { savol = false; continue; }
