@@ -13,6 +13,14 @@
 - Studentlar bo‘yicha `ParticipationMinutes` hisoblash  
 - Studentlar ro‘yxatini turli ko‘rinishlarda ekranga chiqarish:  
   - To‘liq jadval  
+
+
+https://github.com/user-attachments/assets/4b04ace5-cc22-4df5-b009-bae771c62232
+
+
+https://github.com/user-attachments/assets/3d97176c-0fbb-45ae-a71d-0ba21b604aa8
+
+
   - Ism, familiya va ID  
   - Ism va qatnashgan vaqt  
 - Qidiruv imkoniyatlari:  
