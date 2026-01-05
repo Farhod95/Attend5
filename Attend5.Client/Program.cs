@@ -14,7 +14,7 @@ namespace Attend5.Client
         static void Main(string[] args)
         {
             Console.WriteLine("*******************************************");
-            Console.WriteLine("          XUSH KELIBSIZ  !                 ");
+            Console.WriteLine("          XUSH KELIBSIZ                    ");
             Console.WriteLine("*******************************************");
             var program = new Program();
             program.Run();
