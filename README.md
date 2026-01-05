@@ -8,12 +8,6 @@ https://github.com/user-attachments/assets/4b04ace5-cc22-4df5-b009-bae771c62232
 
 ---
 
-## 🎬 Demo Video
-
-[▶ Videoni ko‘rish](Assets/videoNamuna.mp4)
-
----
-
 ## 🔹 Asosiy imkoniyatlar
 
 - Excel fayldan `ExternalAttendance` ma’lumotlarini o‘qish  
