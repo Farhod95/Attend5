@@ -1,4 +1,4 @@
-[▶ Console App Demo Video](Assets/Loom _ Бесплатная программа для записи экрана и видео _ Loom - 5 January 2026.mp4)
+🎬 [Videoni ko‘rish (Console App Demo)](Assets/videoNamuna.mp4)
 # Attend5 — Student Attendance Tracking
 
 ![Attendance](https://img.shields.io/badge/Status-Active-green)
