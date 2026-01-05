@@ -29,7 +29,7 @@ namespace Attend5.Client
 
                 Console.WriteLine();
                 Console.WriteLine("*******************************************");
-                Console.WriteLine("          DASTURNI TANLANG:                ");
+                Console.WriteLine("          DASTURNI TANLANG                 ");
                 Console.WriteLine("*******************************************");
                 Console.WriteLine(" 1. Excel ro'yxatini chiqarish ");
                 Console.WriteLine(" 2. Yangi jadvalni to'liq ko'rish ");
