@@ -2,20 +2,20 @@
 
 namespace Attend5.Infrastructure.Data
 {
-    public class DbContext: FileContext
+    public class DbContext
     {        
         public List<StudentAttend> StudentAttendances { get; set; }
 
-        public DbContext()
+        public DbContext(List<ExternalAttendance> externalAttendances)
         {
             this.StudentAttendances = new List<StudentAttend>();
 
-            foreach (var item in ExternalAttendances)
+            foreach (var item in externalAttendances)
             {
                 var value = item.FullNameWithId.Split(' ');
                 var id = value[2];
-                var firstNamer = value[0];
-                var lastNamer = value[1];
+                var firstName = value[0];
+                var lastName = value[1];
 
                 var myNewStudent = StudentAttendances.FirstOrDefault(x => x.Id == id);
 
@@ -39,8 +39,8 @@ namespace Attend5.Infrastructure.Data
                     StudentAttendances.Add(new StudentAttend
                     {
                         Id = id,
-                        FirstName = firstNamer,
-                        LastName = lastNamer,
+                        FirstName = firstName,
+                        LastName = lastName,
                         Email = item.Email,
                         FirstEntryTime = item.EnterDate,
                         LastExitTime = item.ExitDate,

@@ -4,109 +4,180 @@ namespace Attend5.Application.Service
 {
     public class StudentAttendServices
     {
+        public FileContext myExcelFile { get; set; }
         public DbContext _DbContext {  get; set; }
-        public StudentAttendServices()
+        public StudentAttendServices(FileContext fileContext)
         {
-            this._DbContext = new DbContext();
+            this._DbContext = new DbContext(fileContext.ExternalAttendances);
+            this.myExcelFile = fileContext;
         }
 
         public void YangiAttendJadvaliKorish()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("          YANGI JADVAL KO'RINISHI         ");
-            Console.WriteLine("*******************************************");
-            foreach (var item in this._DbContext.StudentAttendances)
+            if (myExcelFile.ExternalAttendances.Count()!=0)
             {
-                Console.WriteLine($" Id = {item.Id}, FirstName = {item.FirstName}, LastName = {item.LastName}, Email = {item.Email}, FirstEntryTime = {item.FirstEntryTime}, LastExitTime = {item.LastExitTime}, ParticipationMinutes = {item.ParticipationMinutes} ");
+                Console.WriteLine("*******************************************");
+                Console.WriteLine("          YANGI JADVAL KO'RINISHI         ");
+                Console.WriteLine("*******************************************");
+                foreach (var item in this._DbContext.StudentAttendances)
+                {
+                    Console.WriteLine($" Id = {item.Id}, FirstName = {item.FirstName}, LastName = {item.LastName}, Email = {item.Email}, FirstEntryTime = {item.FirstEntryTime}, LastExitTime = {item.LastExitTime}, ParticipationMinutes = {item.ParticipationMinutes} ");
+                }
+            }
+            else
+            {
+                Console.WriteLine(" Excel fayl yuklanmagan!");
             }
         }
 
         public void IsmFamiliyaId()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("          ISM, FAMILIYA VA ID            ");
-            Console.WriteLine("*******************************************");
-            foreach (var item in this._DbContext.StudentAttendances)
+            if (myExcelFile.ExternalAttendances.Count() != 0)
             {
-                Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName}");
                 Console.WriteLine("*******************************************");
+                Console.WriteLine("          ISM, FAMILIYA VA ID            ");
+                Console.WriteLine("*******************************************");
+                foreach (var item in this._DbContext.StudentAttendances)
+                {
+                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName}");
+                    Console.WriteLine("*******************************************");
+                }
+            }
+            else
+            {
+                Console.WriteLine(" Excel fayl yuklanmagan!");
             }
         }
 
         public void IsmQatnashganVaqti()
         {
-            var myNewStudentAttend = this._DbContext.StudentAttendances.OrderByDescending(x=>x.ParticipationMinutes);
-            foreach (var item in myNewStudentAttend)
+            if (myExcelFile.ExternalAttendances.Count() != 0)
             {
-                Console.WriteLine($" {item.Id}   {item.FirstName}   {item.ParticipationMinutes}");
+                var myNewStudentAttend = this._DbContext.StudentAttendances.OrderByDescending(x => x.ParticipationMinutes);
+                foreach (var item in myNewStudentAttend)
+                {
+                    Console.WriteLine($" {item.Id}   {item.FirstName}   {item.ParticipationMinutes}");
+                }
+            }
+            else
+            {
+                Console.WriteLine(" Excel fayl yuklanmagan!");
             }
         }
 
         public void IdBoyichaQidir(string id)
         {
-            var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.Id.Contains(id)).ToList();
-            Console.WriteLine();
-            Console.WriteLine("*******************************************");
-            Console.WriteLine($"          ID BO'YICHA QIDIRUV: {id}         ");
-            Console.WriteLine("*******************************************");
-            if (myNewStudent.Count == 0 )
+            if (myExcelFile.ExternalAttendances.Count() != 0)
             {
-                Console.WriteLine($"Bunday {id} dagi student topilmadi!");
+                var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.Id.Contains(id)).ToList();
+                Console.WriteLine();
                 Console.WriteLine("*******************************************");
+                Console.WriteLine($"          ID BO'YICHA QIDIRUV: {id}         ");
+                Console.WriteLine("*******************************************");
+                if (myNewStudent.Count == 0)
+                {
+                    Console.WriteLine($"Bunday {id} dagi student topilmadi!");
+                    Console.WriteLine("*******************************************");
+                }
+                else
+                {
+                    foreach (var item in myNewStudent)
+                    {
+                        Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                        Console.WriteLine("*******************************************");
+                    }
+                }
             }
             else
             {
-                foreach (var item in myNewStudent)
-                {
-                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
-                    Console.WriteLine("*******************************************");
-                }
-            }                
+                Console.WriteLine(" Excel fayl yuklanmagan!");
+            }
         }
 
         public void IsmBoyichaQidir(string text)
         {
-            var myNewStudent = this._DbContext.StudentAttendances.Where(x=>x.FirstName.ToLower().Contains(text.ToLower())).ToList();
-            Console.WriteLine();
-            Console.WriteLine("*******************************************");
-            Console.WriteLine($"          ISM BO'YICHA QIDIRUV: {text}         ");
-            Console.WriteLine("*******************************************");
-            if (myNewStudent.Count ==0)
+            if (myExcelFile.ExternalAttendances.Count() != 0)
             {
-                Console.WriteLine($"Bunday {text} ismdagi student topilmadi!");
+                var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.FirstName.ToLower().Contains(text.ToLower())).ToList();
+                Console.WriteLine();
                 Console.WriteLine("*******************************************");
-            }
-
-            else
-            {
-                foreach(var item in myNewStudent)
+                Console.WriteLine($"          ISM BO'YICHA QIDIRUV: {text}         ");
+                Console.WriteLine("*******************************************");
+                if (myNewStudent.Count == 0)
                 {
-                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                    Console.WriteLine($"Bunday {text} ismdagi student topilmadi!");
                     Console.WriteLine("*******************************************");
                 }
+
+                else
+                {
+                    foreach (var item in myNewStudent)
+                    {
+                        Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                        Console.WriteLine("*******************************************");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine(" Excel fayl yuklanmagan!");
             }
         }
 
         public void FamiliyaBoyichaQidir(string text)
         {
-            var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.LastName.ToLower().Contains(text.ToLower())).ToList();
-            Console.WriteLine();
-            Console.WriteLine("*******************************************");
-            Console.WriteLine($"          FAMILIYA BO'YICHA QIDIRUV: {text}         ");
-            Console.WriteLine("*******************************************");
-            if (myNewStudent.Count == 0)
+            if (myExcelFile.ExternalAttendances.Count() != 0)
             {
-                Console.WriteLine($"Bunday {text} familiyadagi student topilmadi!");
+                var myNewStudent = this._DbContext.StudentAttendances.Where(x => x.LastName.ToLower().Contains(text.ToLower())).ToList();
+                Console.WriteLine();
                 Console.WriteLine("*******************************************");
-            }
-
-            else
-            {
-                foreach (var item in myNewStudent)
+                Console.WriteLine($"          FAMILIYA BO'YICHA QIDIRUV: {text}         ");
+                Console.WriteLine("*******************************************");
+                if (myNewStudent.Count == 0)
                 {
-                    Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                    Console.WriteLine($"Bunday {text} familiyadagi student topilmadi!");
                     Console.WriteLine("*******************************************");
                 }
+
+                else
+                {
+                    foreach (var item in myNewStudent)
+                    {
+                        Console.WriteLine($"ID: {item.Id} | {item.FirstName} {item.LastName} | ParticipationMinutes: {item.ParticipationMinutes}");
+                        Console.WriteLine("*******************************************");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine(" Excel fayl yuklanmagan!");
+            }
+        }
+
+        public void FamiliyaOzagartr(string id, string familya)
+        {
+            var student = _DbContext.StudentAttendances
+                .FirstOrDefault(x => x.Id == id);
+
+            if (student != null)
+            {
+                student.LastName = familya;
+                Console.WriteLine("Familiya o‘zgartirildi!");
+            }
+        }
+
+        public void IdBoyichaOchirish(string id)
+        {
+            var myStudent = this._DbContext.StudentAttendances.FirstOrDefault(x => x.Id == id);
+
+            if (myStudent != null)
+            {
+                this._DbContext.StudentAttendances.Remove(myStudent);
+                Console.WriteLine($" {id} dagi student o'chirildi ");
+            }
+            else
+            {
+                Console.WriteLine($" {id} dagi student topilmadi ");
             }
         }
     }

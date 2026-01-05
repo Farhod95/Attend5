@@ -5,20 +5,27 @@ namespace Attend5.Application.Service
     public class ExternalAttendanceService
     {
         public FileContext myExcelFile {  get; set; }
-        public ExternalAttendanceService()
+        public ExternalAttendanceService(FileContext fileContext)
         {
-            this.myExcelFile = new FileContext();
+            myExcelFile = fileContext;
         }
 
         public void ExcelEkrangaChiqar()
         {
-            Console.WriteLine("*******************************************");
-            Console.WriteLine("          EXCEL RO'YXATI                  ");
-            Console.WriteLine("*******************************************");
-            foreach (var item in myExcelFile.ExternalAttendances)
+            if (myExcelFile.ExternalAttendances.Count()!=0)
             {
-                Console.WriteLine($" FullNameWithId = {item.FullNameWithId}, Email = {item.Email}, EnterDate = {item.EnterDate}, ExitDate = {item.ExitDate}, Duration = {item.Duration}, IsHost = {item.IsHost}, IsWainting = {item.IsWaiting}");
+                Console.WriteLine("*******************************************");
+                Console.WriteLine("          EXCEL RO'YXATI                  ");
+                Console.WriteLine("*******************************************");
+                foreach (var item in myExcelFile.ExternalAttendances)
+                {
+                    Console.WriteLine($" FullNameWithId = {item.FullNameWithId}, Email = {item.Email}, EnterDate = {item.EnterDate}, ExitDate = {item.ExitDate}, Duration = {item.Duration}, IsHost = {item.IsHost}, IsWainting = {item.IsWaiting}");
+                }
             }
+            else
+            {
+                Console.WriteLine(" Excel fayl yuklanmagan!");
+            }            
         }
     }
 }

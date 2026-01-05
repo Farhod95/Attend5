@@ -1,15 +1,18 @@
 ﻿using Attend5.Application.Service;
+using Attend5.Infrastructure.Data;
 
 namespace Attend5.Client
 {
     internal class Program
     {
-        public ExternalAttendanceService myExternalAttendance {  get; set; }
+        public FileContext myFileContext { get; set; }
         public StudentAttendServices myStudentAttend {  get; set; }
+        public ExternalAttendanceService myExternalAttendance { get; set; }
         public Program()
         {
-            this.myExternalAttendance = new ExternalAttendanceService();
-            this.myStudentAttend = new StudentAttendServices();
+            this.myFileContext = new FileContext();
+            this.myStudentAttend = new StudentAttendServices(myFileContext);
+            this.myExternalAttendance = new ExternalAttendanceService(myFileContext);
         }
         static void Main(string[] args)
         {
@@ -31,13 +34,14 @@ namespace Attend5.Client
                 Console.WriteLine("*******************************************");
                 Console.WriteLine("          DASTURNI TANLANG                 ");
                 Console.WriteLine("*******************************************");
-                Console.WriteLine(" 1. Excel ro'yxatini chiqarish ");
-                Console.WriteLine(" 2. Yangi jadvalni to'liq ko'rish ");
-                Console.WriteLine(" 3. Ism, Familiya va ID ko'rish ");
-                Console.WriteLine(" 4. Ism va qatnashgan vaqtini ko'rish ");
-                Console.WriteLine(" 5. ID bo‘yicha qidirish ");
-                Console.WriteLine(" 6. Ism bo‘yicha qidirish ");
-                Console.WriteLine(" 7. Familiya bo‘yicha qidirish ");
+                Console.WriteLine(" 1. Excel ro'yxatini yuklash ");
+                Console.WriteLine(" 2. Excel ro'yxatini chiqarish ");
+                Console.WriteLine(" 3. Yangi jadvalni to'liq ko'rish ");
+                Console.WriteLine(" 4. Ism, Familiya va ID ko'rish ");
+                Console.WriteLine(" 5. Ism va qatnashgan vaqtini ko'rish ");
+                Console.WriteLine(" 6. Familiya bo‘yicha qidirish ");
+                Console.WriteLine(" 7. Familiya o'zgartrish ");
+                Console.WriteLine(" 8. Id bo'yicha o'chirish ");
                 Console.WriteLine("*******************************************");
                 Console.WriteLine();
                 Console.Write(" Kerakli bo'limni kiriting: ");
@@ -47,49 +51,57 @@ namespace Attend5.Client
                     case "1":
                         {
                             Console.WriteLine();
-                            myExternalAttendance.ExcelEkrangaChiqar();
+                            myFileContext.ExcelYuklash();
+                            myStudentAttend = new StudentAttendServices(myFileContext);
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
                     case "2":
                         {
                             Console.WriteLine();
-                            myStudentAttend.YangiAttendJadvaliKorish();
+                            myExternalAttendance.ExcelEkrangaChiqar();
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
                     case "3":
                         {
                             Console.WriteLine();
-                            myStudentAttend.IsmFamiliyaId();
+                            myStudentAttend.YangiAttendJadvaliKorish();
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
                     case "4":
                         {
                             Console.WriteLine();
-                            myStudentAttend.IsmQatnashganVaqti();
+                            myStudentAttend.IsmFamiliyaId();
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
                     case "5":
                         {
                             Console.WriteLine();
-                            QidirId();
+                            myStudentAttend.IsmQatnashganVaqti();
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
                     case "6":
                         {
                             Console.WriteLine();
-                            QidirIsm();
+                            QidirFamiliya();
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
                     case "7":
                         {
                             Console.WriteLine();
-                            QidirFamiliya();
+                            FamiliyaOzgar();
+                            if (QaytaIshgaTushir()) { savol = false; continue; }
+                            else { continue; }
+                        }
+                    case "8":
+                        {
+                            Console.WriteLine();
+                            IdOchir();
                             if (QaytaIshgaTushir()) { savol = false; continue; }
                             else { continue; }
                         }
@@ -113,23 +125,25 @@ namespace Attend5.Client
             return Console.ReadLine().ToLower() == "yes";
         }
 
-        public void QidirId()
-        {
-            Console.Write(" Kerakli ID ni kiriting: ");
-            myStudentAttend.IdBoyichaQidir(Console.ReadLine());
-        }
-        public void QidirIsm()
-        {
-            Console.Write(" Kerakli ismni kiriting: ");
-            myStudentAttend.IsmBoyichaQidir(Console.ReadLine());
-        }
         public void QidirFamiliya()
         {
             Console.Write(" Kerakli familiyani kiriting: ");
             myStudentAttend.FamiliyaBoyichaQidir(Console.ReadLine());
         }
+        public void FamiliyaOzgar()
+        {
+            Console.Write(" Id kiriting:");
+            string id= Console.ReadLine();
+
+            Console.Write(" Familiya kiriting:");
+            string familiya = Console.ReadLine();
+
+            myStudentAttend.FamiliyaOzagartr(id, familiya);
+        }
+        public void IdOchir()
+        {
+            Console.Write(" Kerakli ID ni kiriting: ");
+            myStudentAttend.IdBoyichaOchirish(Console.ReadLine());
+        }
     }
 }
-
-
-
